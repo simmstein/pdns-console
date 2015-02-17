@@ -1,0 +1,29 @@
+{
+    "name": "simmstein/pdns-console",
+    "type": "project",
+    "description": "pdns-console - console tool to manage pdns server",
+    "keywords": [],
+    "homepage": "http://www.deblan.tv/",
+    "license": "New BSD",
+    "authors": [
+        {
+            "name": "Simon Vieille",
+            "email": "simon+github@deblan.fr"
+        }
+    ],
+    "autoload": {
+        "psr-0": { 
+            "": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "symfony/process": "~2.6",
+        "symfony/console": "2.*",
+        "psr/log": "1.0.0",
+        "symfony/finder": "~2.6",
+        "symfony/yaml": "~2.6",
+        "symfony/filesystem": "2.7.x-dev",
+        "propel/propel": "2.0.x-dev"
+    }
+}
