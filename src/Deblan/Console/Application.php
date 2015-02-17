@@ -6,6 +6,7 @@ use ReflectionException;
 use ReflectionClass;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
+use Propel\Runtime\Propel;
 
 class Application extends BaseApplication
 {
@@ -23,6 +24,11 @@ class Application extends BaseApplication
         chdir($directory);
 
         return $this;
+    }
+
+    public function initPropel()
+    {
+        Propel::init('app/propel/config.php');
     }
 
     public function loadCommands()
@@ -45,7 +51,7 @@ class Application extends BaseApplication
                         ));
                     }
                 } catch (ReflectionException $e) {
-					
+
                 }
             }
         }
