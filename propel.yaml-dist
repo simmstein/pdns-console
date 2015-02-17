@@ -1,12 +1,12 @@
 propel:
     database:
         connections:
-            pdns:
+            default:
                 adapter: mysql
                 classname: Propel\Runtime\Connection\ConnectionWrapper
                 dsn: "mysql:host=localhost;dbname=pdns"
-                user: pdns_user
-                password: pdns_password
+                user: root
+                password: root
                 attributes:
                 settings:
                     charset: utf8
@@ -18,23 +18,13 @@ propel:
         schemaDir: src/
         outputDir: src/
         phpDir: src/
-        phpConfDir: app/propel/configuration
         sqlDir: app/propel/sql
         migrationDir: app/propel/migration
 
-    migrations:
-        
-    reverse:
-        connection: pdns
-
     runtime:
-        defaultConnection: pdns
-        connections:
-            - pdns
+        defaultConnection: default
+        connections: [default]
 
     generator:
-        defaultConnection: pdns
-        targetPackage: srcprojectDir
-
-        connections:
-            - pdns
+        defaultConnection: default
+        connections: [default]
