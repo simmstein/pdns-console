@@ -1,0 +1,40 @@
+propel:
+    database:
+        connections:
+            pdns:
+                adapter: mysql
+                classname: Propel\Runtime\Connection\ConnectionWrapper
+                dsn: "mysql:host=localhost;dbname=pdns"
+                user: pdns_user
+                password: pdns_password
+                attributes:
+                settings:
+                    charset: utf8
+                    queries:
+                        utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+
+    paths:
+        projectDir: src/
+        schemaDir: src/
+        outputDir: src/
+        phpDir: src/
+        phpConfDir: app/propel/configuration
+        sqlDir: app/propel/sql
+        migrationDir: app/propel/migration
+
+    migrations:
+        
+    reverse:
+        connection: pdns
+
+    runtime:
+        defaultConnection: pdns
+        connections:
+            - pdns
+
+    generator:
+        defaultConnection: pdns
+        targetPackage: srcprojectDir
+
+        connections:
+            - pdns
