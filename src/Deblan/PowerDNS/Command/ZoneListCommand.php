@@ -53,7 +53,7 @@ class ZoneListCommand extends Command
 
     protected function showZoneVersion(ZoneVersion $zoneVersion, OutputInterface $output, $key)
     {
-		$output->writeln('');
+        $output->writeln('');
         $output->writeln(sprintf(
             '<info>Version</info>: <comment>%d</comment> - <info>Active</info>: %s',
             $zoneVersion->getVersion(),
