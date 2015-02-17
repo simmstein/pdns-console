@@ -9,7 +9,7 @@ $app = new Application();
 
 $app->chdir(__DIR__.'/../');
 
-$app->addCommandsPath('src/Deblan/PowerDNS/Command/', 'PowerDNS\\Command');
+$app->addCommandsPath('src/Deblan/PowerDNS/Command/', 'Deblan\\PowerDNS\\Command');
 $app->addCommandsPath('vendor/propel/propel/src/Propel/Generator/Command/', 'Propel\\Generator\\Command');
 
 $app->loadCommands();
