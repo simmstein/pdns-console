@@ -1,0 +1,36 @@
+<database name="pdns" namespace="Deblan\PowerDNS\Model" defaultIdMethod="native"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd">
+	<table name="zone" phpName="Zone" isCrossRef="true">
+		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="name" type="VARCHAR" size="255" required="true" />
+		<column name="description" type="VARCHAR" size="255" required="false" />
+		<column name="active_version" type="INTEGER" required="true" defaultValue="1" />
+		<behavior name="timestampable" />
+	</table>
+
+	<table name="zone_version" phpName="ZoneVersion" isCrossRef="true">
+		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="zone_id" type="INTEGER" required="true" />
+		<column name="is_active" type="BOOLEAN" required="true" defaultValue="false" />
+		<column name="version" type="INTEGER" defaultValue="1" />
+		<foreign-key foreignTable="zone" onDelete="cascade" onUpdate="cascade">
+			<reference local="zone_id" foreign="id"/>
+		</foreign-key>
+		<behavior name="timestampable" />
+	</table>
+
+	<table name="zone_record" phpName="ZoneRecord" isCrossRef="true">
+		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="zone_version_id" type="INTEGER" required="true" />
+		<column name="name" type="VARCHAR" size="255" required="true" />
+		<column name="type" type="ENUM" required="true" valueSet="A, AAAA, CNAME, MX, NS, TXT, SPF, WKS, SRV, LOC, SOA" />
+		<column name="content" type="VARCHAR" size="255" required="true" />
+		<column name="ttl" type="integer" required="true" defaultValue="3600" />
+		<column name="prio" type="integer" required="false" />
+		<foreign-key foreignTable="zone_version" onDelete="cascade" onUpdate="cascade">
+			<reference local="zone_version_id" foreign="id"/>
+		</foreign-key>
+		<behavior name="timestampable" />
+	</table>
+</database>
