@@ -45,7 +45,7 @@ class Application extends BaseApplication
                         ));
                     }
                 } catch (ReflectionException $e) {
-
+					
                 }
             }
         }
