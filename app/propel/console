@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+use Deblan\Console\Application;
+
+$app = new Application();
+
+$app->chdir(__DIR__.'/../../');
+
+$app->addCommandsPath('vendor/propel/propel/src/Propel/Generator/Command/', 'Propel\\Generator\\Command');
+
+$app->loadCommands();
+$app->run();;
