@@ -29,3 +29,5 @@ propel:
     generator:
         defaultConnection: default
         connections: [default]
+        objectModel:
+            addClassLevelComment: false
