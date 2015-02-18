@@ -1,6 +1,97 @@
 <database name="default" namespace="Deblan\PowerDNS\Model" defaultIdMethod="native"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd">
+	<table name="comments" idMethod="native" phpName="Comment">
+		<column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+		<column name="domain_id" phpName="DomainId" type="INTEGER" required="true"/>
+		<column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+		<column name="type" phpName="Type" type="VARCHAR" size="10" required="true"/>
+		<column name="modified_at" phpName="ModifiedAt" type="INTEGER" required="true"/>
+		<column name="account" phpName="Account" type="VARCHAR" size="40" required="true"/>
+		<column name="comment" phpName="Comment" type="VARCHAR" size="64000" required="true"/>
+		<index name="comments_domain_id_idx">
+			<index-column name="domain_id"/>
+		</index>
+		<index name="comments_name_type_idx">
+			<index-column name="name"/>
+			<index-column name="type"/>
+		</index>
+		<index name="comments_order_idx">
+			<index-column name="domain_id"/>
+			<index-column name="modified_at"/>
+		</index>
+	</table>
+	<table name="cryptokeys" idMethod="native" phpName="Cryptokey">
+		<column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+		<column name="domain_id" phpName="DomainId" type="INTEGER" required="true"/>
+		<column name="flags" phpName="Flags" type="INTEGER" required="true"/>
+		<column name="active" phpName="Active" type="BOOLEAN" size="1"/>
+		<column name="content" phpName="Content" type="LONGVARCHAR"/>
+		<index name="domainidindex">
+			<index-column name="domain_id"/>
+		</index>
+	</table>
+	<table name="domainmetadata" idMethod="native" phpName="DomainMetaData">
+		<column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+		<column name="domain_id" phpName="DomainId" type="INTEGER" required="true"/>
+		<column name="kind" phpName="Kind" type="VARCHAR" size="32"/>
+		<column name="content" phpName="Content" type="LONGVARCHAR"/>
+		<index name="domainmetadata_idx">
+			<index-column name="domain_id"/>
+			<index-column name="kind"/>
+		</index>
+	</table>
+	<table name="domains" idMethod="native" phpName="Domain">
+		<column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+		<column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+		<column name="master" phpName="Master" type="VARCHAR" size="128"/>
+		<column name="last_check" phpName="LastCheck" type="INTEGER"/>
+		<column name="type" phpName="Type" type="VARCHAR" size="6" required="true"/>
+		<column name="notified_serial" phpName="NotifiedSerial" type="INTEGER"/>
+		<column name="account" phpName="Account" type="VARCHAR" size="40"/>
+		<unique name="name_index">
+			<unique-column name="name"/>
+		</unique>
+	</table>
+	<table name="records" idMethod="native" phpName="Record">
+		<column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+		<column name="domain_id" phpName="DomainId" type="INTEGER"/>
+		<column name="name" phpName="Name" type="VARCHAR" size="255"/>
+		<column name="type" phpName="Type" type="VARCHAR" size="10"/>
+		<column name="content" phpName="Content" type="VARCHAR" size="64000"/>
+		<column name="ttl" phpName="Ttl" type="INTEGER"/>
+		<column name="prio" phpName="Prio" type="INTEGER"/>
+		<column name="change_date" phpName="ChangeDate" type="INTEGER"/>
+		<column name="disabled" phpName="Disabled" type="BOOLEAN" size="1" defaultValue="false"/>
+		<column name="ordername" phpName="Ordername" type="VARCHAR" size="255"/>
+		<column name="auth" phpName="Auth" type="BOOLEAN" size="1" defaultValue="true"/>
+		<index name="nametype_index">
+			<index-column name="name"/>
+			<index-column name="type"/>
+		</index>
+		<index name="domain_id">
+			<index-column name="domain_id"/>
+		</index>
+		<index name="recordorder">
+			<index-column name="domain_id"/>
+			<index-column name="ordername"/>
+		</index>
+	</table>
+	<table name="supermasters" idMethod="native" phpName="Supermaster">
+		<column name="ip" phpName="Ip" type="VARCHAR" size="64" primaryKey="true" required="true"/>
+		<column name="nameserver" phpName="Nameserver" type="VARCHAR" size="255" primaryKey="true" required="true"/>
+		<column name="account" phpName="Account" type="VARCHAR" size="40" required="true"/>
+	</table>
+	<table name="tsigkeys" idMethod="native" phpName="Tsigkeys">
+		<column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+		<column name="name" phpName="Name" type="VARCHAR" size="255"/>
+		<column name="algorithm" phpName="Algorithm" type="VARCHAR" size="50"/>
+		<column name="secret" phpName="Secret" type="VARCHAR" size="255"/>
+		<unique name="namealgoindex">
+			<unique-column name="name"/>
+			<unique-column name="algorithm"/>
+		</unique>
+	</table>
 	<table name="zone" phpName="Zone" isCrossRef="true">
 		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
 		<column name="name" type="VARCHAR" size="255" required="true" />
@@ -8,7 +99,6 @@
 		<column name="active_version" type="INTEGER" required="true" defaultValue="1" />
 		<behavior name="timestampable" />
 	</table>
-
 	<table name="zone_version" phpName="ZoneVersion" isCrossRef="true">
 		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
 		<column name="zone_id" type="INTEGER" required="true" />
@@ -19,7 +109,6 @@
 		</foreign-key>
 		<behavior name="timestampable" />
 	</table>
-
 	<table name="zone_record" phpName="ZoneRecord" isCrossRef="true">
 		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
 		<column name="zone_version_id" type="INTEGER" required="true" />
