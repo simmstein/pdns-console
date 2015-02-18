@@ -129,7 +129,7 @@
         <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
         <column name="zone_version_id" type="INTEGER" required="true" />
         <column name="name" type="VARCHAR" size="255" required="true" />
-        <column name="type" type="ENUM" required="true" valueSet="A, AAAA, CNAME, MX, NS, TXT, SPF, WKS, SRV, LOC, SOA" />
+        <column name="type" type="ENUM" required="true" valueSet="SOA, NS, MX, A, AAAA, CNAME, TXT, PTR, HWINFO, SRV, NAPTR" />
         <column name="content" type="VARCHAR" size="255" required="true" />
         <column name="ttl" type="integer" required="true" defaultValue="3600" />
         <column name="prio" type="integer" required="false" />
