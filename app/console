@@ -4,6 +4,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Deblan\Console\Application;
+use Deblan\Console\Command\Input\Input;
 
 $app = new Application();
 
@@ -12,4 +13,4 @@ $app->chdir(__DIR__.'/../');
 $app->addCommandsPath('src/Deblan/PowerDNS/Command/', 'Deblan\\PowerDNS\\Command');
 $app->initPropel();
 $app->loadCommands();
-$app->run();;
+$app->run(new Input());

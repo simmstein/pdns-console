@@ -58,6 +58,10 @@
         <column name="type" phpName="Type" type="VARCHAR" size="6" required="true"/>
         <column name="notified_serial" phpName="NotifiedSerial" type="INTEGER"/>
         <column name="account" phpName="Account" type="VARCHAR" size="40"/>
+        <column name="zone_id" type="INTEGER" required="false" />
+        <foreign-key foreignTable="zone" onDelete="setNull" onUpdate="cascade">
+            <reference local="zone_id" foreign="id"/>
+        </foreign-key>
         <unique name="name_index">
             <unique-column name="name"/>
         </unique>

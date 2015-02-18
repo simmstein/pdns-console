@@ -30,7 +30,7 @@ class ZoneListCommand extends AbstractZoneCommand
         $zones = $query->find();
 
         foreach ($zones as $key => $zone) {
-            $this->showZone($zone, $key);
+            $this->getHelper('zone')->showZone($zone, $key);
         }
     }
 
