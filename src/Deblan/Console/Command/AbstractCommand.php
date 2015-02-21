@@ -7,12 +7,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Deblan\PowerDNS\Command\Helper\ZoneHelper;
 use Deblan\PowerDNS\Command\Helper\DomainHelper;
+use Deblan\PowerDNS\Command\Helper\ValidatorHelper;
 
 abstract class AbstractCommand extends Command
 {
     protected $input;
 
     protected $output;
+
+    protected $dialog;
 
     public function getHelper($helper)
     {
@@ -22,6 +25,14 @@ abstract class AbstractCommand extends Command
 
         if ($helper === 'domain') {
             return DomainHelper::getInstance($this->getInput(), $this->getOutput());
+        }
+
+        if ($helper === 'validator') {
+            return ValidatorHelper::getInstance($this->getInput(), $this->getOutput());
+        }
+
+        if ($helper === 'dialog') {
+            return $this->getHelperSet()->get('dialog');
         }
 
         throw new \InvalidArgumentException(sprintf('Invalid helper "%s"', $helper));
