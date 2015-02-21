@@ -43,7 +43,7 @@ class DomainListCommand extends AbstractCommand
 
             if ($this->getInput()->getOption('zone') && $domain->getZone()) {
                 $this->getOutput()->writeln('');
-                $this->getHelper('zone')->showZone($domain->getZone());
+                $this->getHelper('zone')->showZone($domain->getZone(), 0, true);
                 $this->getOutput()->writeln('');
                 $this->getOutput()->writeln('');
             }
