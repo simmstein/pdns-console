@@ -72,7 +72,7 @@ class ZoneRecordAddCommand extends AbstractCommand
         while (!$this->getHelper('validator')->isRecordType($type)) {
             $this->getOutput()->writeln('');
             $this->getOutput()->writeln(sprintf(
-                'Possible choices: <comment>%s</comment>',
+                'Available types: <comment>%s</comment>',
                 implode(' ', ZoneRecordTableMap::getValueSet(ZoneRecordTableMap::COL_TYPE))
             ));
 
