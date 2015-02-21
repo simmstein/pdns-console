@@ -55,7 +55,7 @@
         <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
         <column name="master" phpName="Master" type="VARCHAR" size="128"/>
         <column name="last_check" phpName="LastCheck" type="INTEGER"/>
-        <column name="type" phpName="Type" type="VARCHAR" size="6" required="true"/>
+        <column name="type" phpName="Type" type="VARCHAR" size="6" required="true" />
         <column name="notified_serial" phpName="NotifiedSerial" type="INTEGER"/>
         <column name="account" phpName="Account" type="VARCHAR" size="40"/>
         <column name="zone_id" type="INTEGER" required="false" />
