@@ -8,20 +8,34 @@ use Deblan\PowerDNS\Model\Base\ZoneVersion;
 
 class ZoneHelper extends AbstractHelper
 {
-    public function showZone(Zone $zone, $key = 0)
+    const INDENT = "      <fg=cyan>></> ";
+
+    public function showZone(Zone $zone, $key = 0, $withIndent = false)
     {
-        $this->getOutput()->writeln(sprintf('<info>%s</info>.', $zone->getName()));
+        $this->getOutput()->writeln(sprintf(
+            '%s<info>%s</info>.',
+            $withIndent ? self::INDENT : '',
+            $zone->getName()
+        ));
 
         if ($zone->getDescription()) {
-            $this->getOutput()->writeln($zone->getDescription());
+            $this->getOutput()->writeln(($withIndent ? self::INDENT : '').$zone->getDescription());
+        }
+
+        if ($zone->getDescription()) {
+            $this->getOutput()->writeln(sprintf(
+                '%sID: %d',
+                $withIndent ? self::INDENT : '',
+                $zone->getId()
+            ));
         }
 
         foreach ($zone->getZoneVersions() as $key => $zoneVersion) {
-            $this->showZoneVersion($zoneVersion, $key);
+            $this->showZoneVersion($zoneVersion, $key, $withIndent);
         }
     }
 
-    public function showZoneVersion(ZoneVersion $zoneVersion, $key = 0)
+    public function showZoneVersion(ZoneVersion $zoneVersion, $key = 0, $withIndent = false)
     {
         if ($this->getInput()->getOption('active') && false === $zoneVersion->getIsActive()) {
             return;
@@ -31,25 +45,34 @@ class ZoneHelper extends AbstractHelper
             return;
         }
 
-        $this->getOutput()->writeln('');
+        $this->getOutput()->writeln($withIndent ? self::INDENT : '');
         $this->getOutput()->writeln(sprintf(
-            '<info>Version</info>: <comment>%d</comment> - <info>Active</info>: %s',
+            '%s<info>Version</info>: <comment>%d</comment> - <info>Active</info>: %s',
+            $withIndent ? self::INDENT : '',
             $zoneVersion->getVersion(),
             $zoneVersion->getIsActive() ? 'Yes' : 'No'
         ));
 
-        $this->showZoneVersionRecords($zoneVersion);
+        $this->showZoneVersionRecords($zoneVersion, $withIndent);
     }
 
-    public function showZoneVersionRecords(ZoneVersion $zoneVersion)
+    public function showZoneVersionRecords(ZoneVersion $zoneVersion, $withIndent = false)
     {
-        $this->getOutput()->writeln('');
-        $this->getOutput()->writeln('<comment>   ID | NAME                  | TYPE      | TTL    | PRIO    | CONTENT</comment>');
-        $this->getOutput()->writeln('<comment>----------------------------------------------------------------------</comment>');
+        $this->getOutput()->writeln($withIndent ? self::INDENT : '');
+        $this->getOutput()->writeln(sprintf(
+            '%s<comment>   ID | NAME                  | TYPE      | TTL    | PRIO    | CONTENT</comment>',
+            $withIndent ? self::INDENT : ''
+        ));
+
+        $this->getOutput()->writeln(sprintf(
+            '%s<comment>----------------------------------------------------------------------</comment>',
+            $withIndent ? self::INDENT : ''
+        ));
 
         foreach ($zoneVersion->getZoneRecords() as $zoneRecord) {
             $this->getOutput()->writeln(sprintf(
-                '%5d | %s | %s | %s | %s | %s',
+                '%s%5d | %s | %s | %s | %s | %s',
+                $withIndent ? self::INDENT : '',
                 $zoneRecord->getId(),
                 str_pad($zoneRecord->getName(), 21),
                 str_pad($zoneRecord->getType(), 9),

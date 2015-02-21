@@ -13,6 +13,7 @@ class DomainHelper extends AbstractHelper
         $this->getOutput()->writeln(sprintf('ID    : <info>%d</info>', $domain->getId()));
         $this->getOutput()->writeln(sprintf('TYPE  : <info>%s</info>', $domain->getType()));
         $this->getOutput()->writeln(sprintf('MASTER: <info>%s</info>', $domain->getMaster()));
+        $this->getOutput()->writeln('');
     }
 
     public function showShortDomain(Domain $domain, $key = 0)
