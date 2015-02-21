@@ -31,7 +31,7 @@ class ValidatorHelper extends AbstractHelper
     {
         return in_array($value, ['NATIVE', 'MASTER', 'SLAVE', 'SUPERSLAVE']);
     }
-	
+
     public static function getName()
     {
         return 'validator';
