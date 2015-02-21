@@ -13,26 +13,37 @@ class ZoneHelper extends AbstractHelper
     public function showZone(Zone $zone, $key = 0, $withIndent = false)
     {
         $this->getOutput()->writeln(sprintf(
-            '%s<info>%s</info>.',
+            '%s<info>%s</info>',
             $withIndent ? self::INDENT : '',
             $zone->getName()
+        ));
+
+        $this->getOutput()->writeln(sprintf(
+            '%s<info>%s</info>',
+            $withIndent ? self::INDENT : '',
+            str_repeat('-', strlen($zone->getName()))
         ));
 
         if ($zone->getDescription()) {
             $this->getOutput()->writeln(($withIndent ? self::INDENT : '').$zone->getDescription());
         }
 
-        if ($zone->getDescription()) {
-            $this->getOutput()->writeln(sprintf(
-                '%sID: %d',
-                $withIndent ? self::INDENT : '',
-                $zone->getId()
-            ));
+        $this->getOutput()->writeln(sprintf(
+            '%sID: %d',
+            $withIndent ? self::INDENT : '',
+            $zone->getId()
+        ));
+
+        if (!$zone->countZoneVersions()) {
+            $this->getOutput()->writeln(($withIndent ? self::INDENT : ''));
+            $this->getOutput()->writeln(($withIndent ? self::INDENT : '').'No version found.');
+        } else {
+            foreach ($zone->getZoneVersions() as $key => $zoneVersion) {
+                $this->showZoneVersion($zoneVersion, $key, $withIndent);
+            }
         }
 
-        foreach ($zone->getZoneVersions() as $key => $zoneVersion) {
-            $this->showZoneVersion($zoneVersion, $key, $withIndent);
-        }
+        $this->getOutput()->writeln(($withIndent ? self::INDENT : ''));
     }
 
     public function showZoneVersion(ZoneVersion $zoneVersion, $key = 0, $withIndent = false)
@@ -59,6 +70,13 @@ class ZoneHelper extends AbstractHelper
     public function showZoneVersionRecords(ZoneVersion $zoneVersion, $withIndent = false)
     {
         $this->getOutput()->writeln($withIndent ? self::INDENT : '');
+
+        if (!$zoneVersion->countZoneRecords()) {
+            $this->getOutput()->writeln(($withIndent ? self::INDENT : '').'No record found.');
+
+            return;
+        }
+
         $this->getOutput()->writeln(sprintf(
             '%s<comment>   ID | NAME                  | TYPE      | TTL    | PRIO    | CONTENT</comment>',
             $withIndent ? self::INDENT : ''

@@ -9,18 +9,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Deblan\Console\Command\AbstractCommand;
 use Deblan\PowerDNS\Model\Domain;
 use Deblan\PowerDNS\Model\DomainQuery;
-use Deblan\PowerDNS\Model\ZoneQuery;
 
-class ZoneAssignCommand extends AbstractCommand
+class ZoneUnassignCommand extends AbstractCommand
 {
     protected function configure()
     {
         parent::configure();
 
         $this
-            ->setName('zone:assign')
+            ->setName('zone:unassign')
             ->setDescription('Add a domain')
-            ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
             ->addArgument('domain_id', InputArgument::REQUIRED, 'ZONE_ID')
             ->setHelp("The <info>%command.name%</info> ");
     }
@@ -29,15 +27,7 @@ class ZoneAssignCommand extends AbstractCommand
     {
         parent::execute($input, $output);
 
-        $zoneId = (int) $this->getInput()->getArgument('zone_id');
-        $zone = ZoneQuery::create()->findOneById($zoneId);
         $domain = DomainQuery::create()->findOneById((int) $this->getInput()->getArgument('domain_id'));
-
-        if ($null === $zone) {
-            $this->getOutput()->writeln('<error>Zone not found.</error>');
-
-            return;
-        }
 
         if (null === $domain) {
             $this->getOutput()->writeln('<error>Domain not found.</error>');
@@ -45,7 +35,7 @@ class ZoneAssignCommand extends AbstractCommand
             return;
         }
 
-        $domain->setZone($zone)->save();
+        $domain->setZone(null)->save();
 
         $this->getOutput()->writeln('<info>Domain zone updated.</info>');
     }
