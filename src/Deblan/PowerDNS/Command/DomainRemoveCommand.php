@@ -45,7 +45,7 @@ class DomainRemoveCommand extends AbstractCommand
         }
 
         if (null === $domain) {
-            $this->getOutput()->writeln('<error>No domain found.</error>');
+            $this->getOutput()->writeln('<error>Domain not found.</error>');
 
             return;
         }

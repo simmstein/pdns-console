@@ -4,8 +4,6 @@ namespace Deblan\PowerDNS\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Command\Command;
 
 class AboutCommand extends Command
@@ -20,11 +18,11 @@ class AboutCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-		$output->writeln(<<<EOF
+        $output->writeln(<<<EOF
 <info>PDNS-CONSOLE</info>
 
 PDNS-Console provided a CLI to manage PowerDNS application and improved it by
-adding a powerfull DNS zone versionning. 
+adding a powerfull DNS zone versionning.
 
 <info>AUTHOR</info>
 

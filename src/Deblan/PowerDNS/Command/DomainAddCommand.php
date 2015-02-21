@@ -30,12 +30,12 @@ class DomainAddCommand extends AbstractCommand
         parent::execute($input, $output);
 
         $name = $this->getInput()->getOption('name');
+        $master = $this->getInput()->getOption('master');
+        $type = $this->getInput()->getOption('type');
 
         while (null === $name || trim($name) === '') {
             $name = $this->getHelper('dialog')->ask($this->getOutput(), 'Name: ', null);
         }
-
-        $master = $this->getInput()->getOption('master');
 
         if ($master === 'null') {
             $master = null;
@@ -43,8 +43,6 @@ class DomainAddCommand extends AbstractCommand
             $response = $this->getHelper('dialog')->ask($this->getOutput(), 'MASTER [null]: ', null);
             $master = empty($response) ? null : $response;
         }
-
-        $type = $this->getInput()->getOption('type');
 
         if ($type === 'null') {
             $type = null;
