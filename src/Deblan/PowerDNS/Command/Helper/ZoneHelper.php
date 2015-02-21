@@ -56,6 +56,10 @@ class ZoneHelper extends AbstractHelper
             return;
         }
 
+        if ($this->getInput()->getOption('zversion') && $zoneVersion->getVersion() !== (int) $this->getInput()->getOption('zversion')) {
+            return;
+        }
+
         $this->getOutput()->writeln($withIndent ? self::INDENT : '');
         $this->getOutput()->writeln(sprintf(
             '%s<info>Version</info>: <comment>%d</comment> - <info>Active</info>: %s',

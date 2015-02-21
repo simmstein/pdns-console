@@ -30,7 +30,6 @@ class DomainRemoveCommand extends AbstractCommand
 
         $name = $this->getInput()->getOption('name');
         $id = $this->getInput()->getOption('id');
-        $id = $this->getInput()->getOption('id');
 
         if (null === $name && null === $id) {
             $this->getOutput()->writeln('<error>You must give a name or an id.</error>');
