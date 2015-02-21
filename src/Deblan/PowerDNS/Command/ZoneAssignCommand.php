@@ -21,7 +21,7 @@ class ZoneAssignCommand extends AbstractCommand
             ->setName('zone:assign')
             ->setDescription('Add a domain')
             ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->addArgument('domain_id', InputArgument::REQUIRED, 'ZONE_ID')
+            ->addArgument('domain_id', InputArgument::REQUIRED, 'DOMAIN_ID')
             ->setHelp("The <info>%command.name%</info> ");
     }
 
@@ -33,7 +33,7 @@ class ZoneAssignCommand extends AbstractCommand
         $zone = ZoneQuery::create()->findOneById($zoneId);
         $domain = DomainQuery::create()->findOneById((int) $this->getInput()->getArgument('domain_id'));
 
-        if ($null === $zone) {
+        if (null === $zone) {
             $this->getOutput()->writeln('<error>Zone not found.</error>');
 
             return;

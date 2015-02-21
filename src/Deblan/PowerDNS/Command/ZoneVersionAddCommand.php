@@ -40,8 +40,8 @@ class ZoneVersionAddCommand extends AbstractCommand
         }
 
         $zoneVersion = (new ZoneVersion())
-            ->setZone($zone)
             ->setVersion($zone->countZoneVersions() ? ZoneVersionQuery::create()->orderByVersion(Criteria::DESC)->findOne()->getVersion() + 1 : 1)
+            ->setZone($zone)
             ->setIsActive(false)
             ->save();
 
