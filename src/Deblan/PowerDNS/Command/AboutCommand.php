@@ -23,7 +23,8 @@ class AboutCommand extends Command
 		$output->writeln(<<<EOF
 <info>PDNS-CONSOLE</info>
 
-PDNS-Console provided a CLI to manage PowerDNS application and improved it by adding a powerfull DNS zone versionning. 
+PDNS-Console provided a CLI to manage PowerDNS application and improved it by
+adding a powerfull DNS zone versionning. 
 
 <info>AUTHOR</info>
 
