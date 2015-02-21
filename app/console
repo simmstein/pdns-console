@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Deblan\Console\Application;
 use Deblan\Console\Command\Input\Input;
 
-$app = new Application();
+$app = new Application('PowerDNS CLI', '1');
 
 $app->chdir(__DIR__.'/../');
 
