@@ -12,8 +12,7 @@ class AboutCommand extends Command
     {
         $this
             ->setName('about')
-            ->setDescription('')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->setDescription('Show information about pdns-console');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
