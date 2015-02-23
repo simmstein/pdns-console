@@ -47,7 +47,7 @@ PDNS-Console provided a CLI to manage PowerDNS application and improved it by ad
 * We want to mange the domain *example.com*
 * We need 3 records:
 	* *example.tld* -> 1.2.3.4
-	* *www.example.com* -> same as *example.com*
+	* *www.example.tld* -> same as *example.tld*
     * *example.tld* MX is mail.foo.net
 
 #### Add the domain
