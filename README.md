@@ -30,10 +30,10 @@ curl -sS https://getcomposer.org/installer | php
 #### Edit *propel.yaml*
 
 * ```dsn: "mysql:host=localhost;dbname=pdns"```
-  * Change *localhost* by the database server name
-  * Change "pdns" by the database name
+  * Change *localhost* with the database server name
+  * Change "pdns" with the database name
 
-* Change user and password values with you pdsn database login
+* Change user and password values with your pdsn database login
 
 Run `./app/propel/console config:convert`
 
@@ -45,7 +45,7 @@ Run `./app/propel/console --recursive model:build`
 
 #### Database updates
 
-pdns-console needs to update pdns original tables and uses 3 mores.
+pdns-console needs to update pdns original tables and uses 3 more.
 
 ```shell
 ./app/propel/console --recursive migration:diff
