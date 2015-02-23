@@ -18,12 +18,42 @@ git clone https://github.com/simmstein/pdns-console.git
 cd pdns-console
 ```
 
-### Configure database access
+### Dependances
 
-In propel.yaml:
+```
+curl -sS https://getcomposer.org/installer | php
+./composer.phar install
+```
+
+### Database
+
+#### Edit *propel.yaml*
 
 * ```dsn: "mysql:host=localhost;dbname=pdns"```
   * Change *localhost* by the database server name
   * Change "pdns" by the database name
 
 * Change user and password values with you pdsn database login
+
+Run `./app/propel/console config:convert`
+
+#### Models
+
+The sources does not contain all application models. You have to generate them:
+
+Run `./app/propel/console --recursive model:build`
+
+#### Database updates
+
+pdns-console needs to update pdns original tables and uses 3 mores.
+
+```shell
+./app/propel/console --recursive migration:diff
+./app/propel/console --recursive migration:migrate
+```
+
+## Symlink
+
+To access the console without use the full path of `app/console`, make a symlink:
+
+```ln -s $PWD/app/console /usr/local/bin/```
