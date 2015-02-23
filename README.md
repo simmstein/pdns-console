@@ -108,6 +108,7 @@ No record found.
 $ ./app/console zone:record:add 4 1 --name @ --type SOA --content "localhost. postmaster@localhost 0 10800 3600 604800 3600" --ttl 3600 --prio null
 ```
 
+```
 $ ./app/console zone:record:add 4 1
 Name: @
 Content: 1.2.3.4
