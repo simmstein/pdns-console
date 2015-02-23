@@ -18,10 +18,12 @@ class DomainRemoveCommand extends AbstractCommand
         $this
             ->setName('domain:remove')
             ->setDescription('Remove a domain')
-            ->addOption('name', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('id', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('confirm', null, InputOption::VALUE_NONE, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Domain name')
+            ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Domain ID')
+            ->addOption('confirm', null, InputOption::VALUE_NONE, 'Confirmation')
+            ->setHelp("<info>%command.name%</info>
+
+You can use <info>--name</info> or <info>--id</info> to identify the domain to remove.");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -52,6 +54,8 @@ class DomainRemoveCommand extends AbstractCommand
         $confirm = $this->getInput()->getOption('confirm');
 
         if (false === $confirm) {
+            $this->getOutput()->writeln('<comment>By removing this domain, you will remove all associated records!</comment>');
+
             $confirm = $this->getHelper('dialog')->askConfirmation($this->getOutput(), '<info>Do you confirm? [<comment>no</comment>] ', false);
         }
 

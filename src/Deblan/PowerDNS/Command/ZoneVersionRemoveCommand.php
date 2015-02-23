@@ -19,10 +19,9 @@ class ZoneVersionRemoveCommand extends AbstractCommand
         $this
             ->setName('zone:version:remove')
             ->setDescription('Remove an unactivated zone version')
-            ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->addArgument('version', InputArgument::REQUIRED, 'VERSION')
-            ->addOption('confirm', null, InputOption::VALUE_NONE, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addArgument('zone_id', InputArgument::REQUIRED, 'Zone ID')
+            ->addArgument('version', InputArgument::REQUIRED, 'Zone version')
+            ->addOption('confirm', null, InputOption::VALUE_NONE, '');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

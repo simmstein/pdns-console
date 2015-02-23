@@ -18,10 +18,9 @@ class DomainListCommand extends AbstractCommand
         $this
             ->setName('domain:list')
             ->setDescription('List domains')
-            ->addOption('short', null, InputOption::VALUE_NONE, '')
-            ->addOption('zone', null, InputOption::VALUE_NONE, '')
-            ->addOption('active', null, InputOption::VALUE_NONE, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addOption('short', null, InputOption::VALUE_NONE, 'Show only domain names')
+            ->addOption('zone', null, InputOption::VALUE_NONE, 'Show zone assigned (with all zone versions)')
+            ->addOption('active', null, InputOption::VALUE_NONE, 'Show the activated zones versions');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

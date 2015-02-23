@@ -19,9 +19,8 @@ class ZoneVersionCopyCommand extends AbstractCommand
         $this
             ->setName('zone:version:copy')
             ->setDescription('Copy a zone version')
-            ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->addArgument('version', InputArgument::REQUIRED, 'VERSION')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addArgument('zone_id', InputArgument::REQUIRED, 'Zone ID')
+            ->addArgument('version', InputArgument::REQUIRED, 'Zone version');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

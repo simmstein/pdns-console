@@ -18,9 +18,8 @@ class ZoneUnassignCommand extends AbstractCommand
 
         $this
             ->setName('zone:unassign')
-            ->setDescription('Add a domain')
-            ->addArgument('domain_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->setDescription('Unassign the domain zone')
+            ->addArgument('domain_id', InputArgument::REQUIRED, 'Domain ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

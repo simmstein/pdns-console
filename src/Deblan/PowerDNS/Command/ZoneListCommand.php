@@ -17,10 +17,9 @@ class ZoneListCommand extends AbstractZoneCommand
         $this
             ->setName('zone:list')
             ->setDescription('List DNS zones')
-            ->addOption('name', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('id', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('zversion', null, InputOption::VALUE_REQUIRED, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Filter by zone name')
+            ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Filter by zone ID')
+            ->addOption('vs', null, InputOption::VALUE_REQUIRED, 'Filter zone version');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -43,8 +42,8 @@ class ZoneListCommand extends AbstractZoneCommand
         if ($this->getInput()->getOption('name')) {
             $query->filterByName(sprintf('%%%s%%', $this->getInput()->getOption('name')));
         }
-        
-		if ($this->getInput()->getOption('id')) {
+
+        if ($this->getInput()->getOption('id')) {
             $query->filterById((int) $this->getInput()->getOption('id'));
         }
 

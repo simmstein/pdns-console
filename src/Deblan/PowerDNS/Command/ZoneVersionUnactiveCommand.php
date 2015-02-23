@@ -17,10 +17,9 @@ class ZoneVersionUnactiveCommand extends AbstractCommand
 
         $this
             ->setName('zone:version:unactive')
-            ->setDescription('Unactive a zone version')
-            ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->addArgument('version', InputArgument::REQUIRED, 'VERSION')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->setDescription('Active a zone version')
+            ->addArgument('zone_id', InputArgument::REQUIRED, 'Zone ID')
+            ->addArgument('version', InputArgument::REQUIRED, 'Zone version');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

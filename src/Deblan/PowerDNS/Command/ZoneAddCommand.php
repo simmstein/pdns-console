@@ -18,9 +18,8 @@ class ZoneAddCommand extends AbstractCommand
         $this
             ->setName('zone:add')
             ->setDescription('Add a zone')
-            ->addOption('name', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('description', null, InputOption::VALUE_REQUIRED, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Zone name')
+            ->addOption('description', null, InputOption::VALUE_REQUIRED, 'Zone description');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

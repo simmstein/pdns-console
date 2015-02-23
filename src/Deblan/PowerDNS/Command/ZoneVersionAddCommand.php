@@ -21,8 +21,7 @@ class ZoneVersionAddCommand extends AbstractCommand
         $this
             ->setName('zone:version:add')
             ->setDescription('Add a zone version')
-            ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addArgument('zone_id', InputArgument::REQUIRED, 'Zone ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

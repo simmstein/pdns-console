@@ -19,10 +19,9 @@ class ZoneAssignCommand extends AbstractCommand
 
         $this
             ->setName('zone:assign')
-            ->setDescription('Add a domain')
-            ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->addArgument('domain_id', InputArgument::REQUIRED, 'DOMAIN_ID')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->setDescription('Assign a zone to a domain.')
+            ->addArgument('zone_id', InputArgument::REQUIRED, 'Zone ID')
+            ->addArgument('domain_id', InputArgument::REQUIRED, 'Domain ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

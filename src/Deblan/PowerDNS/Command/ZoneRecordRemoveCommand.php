@@ -19,9 +19,8 @@ class ZoneRecordRemoveCommand extends AbstractCommand
         $this
             ->setName('zone:record:remove')
             ->setDescription('Remove a zone record')
-            ->addArgument('id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->addOption('confirm', null, InputOption::VALUE_NONE, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addArgument('id', InputArgument::REQUIRED, 'Record ID (the record can not be associated with an active zone version)')
+            ->addOption('confirm', null, InputOption::VALUE_NONE, 'Confirmation');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -39,7 +38,7 @@ class ZoneRecordRemoveCommand extends AbstractCommand
         }
 
         if ($zoneRecord->getZoneVersion()->getIsActive()) {
-            $this->getOutput()->writeln('<error>You can not remove a zone record of an activated zone version.</error>');
+            $this->getOutput()->writeln('<error>You can not remove a record of an active zone version.</error>');
 
             return;
         }

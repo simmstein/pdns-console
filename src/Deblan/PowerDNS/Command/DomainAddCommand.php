@@ -19,10 +19,25 @@ class DomainAddCommand extends AbstractCommand
         $this
             ->setName('domain:add')
             ->setDescription('Add a domain')
-            ->addOption('name', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('type', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('master', null, InputOption::VALUE_REQUIRED, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Domain name')
+            ->addOption('type', null, InputOption::VALUE_REQUIRED, 'Domain type')
+            ->addOption('master', null, InputOption::VALUE_REQUIRED, 'Domain master')
+            ->setHelp("<info>%command.name%</info>
+
+<info>--master</info>
+    This describes the master nameserver from which this domain should be slaved. Takes IPs, not hostnames!
+
+    USe \"null\" to set NULL value
+
+<info>--type</info>
+    Posible values are:  <comment>NATIVE</comment>,  <comment>MASTER</comment>,  <comment>SLAVE</comment>,  <comment>SUPERSLAVE</comment>
+
+    Recommaned value: NATIVE
+
+    For reference to the generated querys check:  MASTER-SLAVE-QUERIES
+    <comment>https://doc.powerdns.com/md/authoritative/backend-generic-mypgsql/#MASTER-SLAVE-QUERIES</comment>
+
+    Use \"null\" to set NULL value.");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

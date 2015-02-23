@@ -21,14 +21,18 @@ class ZoneRecordAddCommand extends AbstractCommand
         $this
             ->setName('zone:record:add')
             ->setDescription('Add a zone record')
-            ->addArgument('zone_id', InputArgument::REQUIRED, 'ZONE_ID')
-            ->addArgument('version', InputArgument::REQUIRED, 'VERSION')
-            ->addOption('name', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('type', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('content', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('ttl', null, InputOption::VALUE_REQUIRED, '')
-            ->addOption('prio', null, InputOption::VALUE_REQUIRED, '')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->addArgument('zone_id', InputArgument::REQUIRED, 'Zone ID')
+            ->addArgument('version', InputArgument::REQUIRED, 'Zone verion (only unactavated versions)')
+            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Record name (eg: www)')
+            ->addOption('type', null, InputOption::VALUE_REQUIRED, 'Record type (eg: A)')
+            ->addOption('content', null, InputOption::VALUE_REQUIRED, 'Record content (eg: 1.2.3.4)')
+            ->addOption('ttl', null, InputOption::VALUE_REQUIRED, 'Record TTL (eg: 3600)')
+            ->addOption('prio', null, InputOption::VALUE_REQUIRED, 'Record priority (eg: 10)')
+            ->setHelp("<info>%command.name%</info>
+
+<info>--prio</info>
+    Use \"null\" to set NULL value
+");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

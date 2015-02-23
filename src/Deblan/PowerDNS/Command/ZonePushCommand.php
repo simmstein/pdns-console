@@ -19,7 +19,11 @@ class ZonePushCommand extends AbstractZoneCommand
         $this
             ->setName('zone:push')
             ->setDescription('Push activated zones to PowerDNS tables')
-            ->setHelp("The <info>%command.name%</info> ");
+            ->setHelp("<info>%command.name%</info>
+
+After editing zone versions, you have to push all modifications by using <info>%command.name%</info>.
+
+The PDNS records will be replaced with your activated zones versions.");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
