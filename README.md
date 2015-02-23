@@ -2,6 +2,44 @@
 
 PDNS-Console provided a CLI to manage PowerDNS application and improved it by adding a powerfull DNS zone versionning. 
 
+# Commands
+
+## Available commands
+
+### Helpers
+
+```
+ about                   Show information about pdns-console
+ help                    Displays help for a command
+ list                    Lists commands
+```
+
+### Manage domains
+
+```
+ domain:add              Add a domain
+ domain:list             List domains
+ domain:remove           Remove a domain
+```
+
+### Manage zones
+
+```
+ zone:add                Add a zone
+ zone:assign             Assign a zone to a domain.
+ zone:list               List DNS zones
+ zone:push               Push activated zones to PowerDNS tables
+ zone:record:add         Add a zone record
+ zone:record:remove      Remove a zone record
+ zone:remove             Remove a zone
+ zone:unassign           Unassign the domain zone
+ zone:version:active     Active a zone version
+ zone:version:add        Add a zone version
+ zone:version:copy       Copy a zone version
+ zone:version:remove     Remove an unactivated zone version
+ zone:version:unactive   Active a zone version
+```
+
 # Installation
 
 ## Requirements

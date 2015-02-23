@@ -23,7 +23,9 @@ class DomainRemoveCommand extends AbstractCommand
             ->addOption('confirm', null, InputOption::VALUE_NONE, 'Confirmation')
             ->setHelp("<info>%command.name%</info>
 
-You can use <info>--name</info> or <info>--id</info> to identify the domain to remove.");
+You can use <info>--name</info> or <info>--id</info> to identify the domain to remove.
+
+<comment>By removing a domain, you will remove all associated records!</comment>");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
