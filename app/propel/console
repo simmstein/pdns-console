@@ -12,4 +12,4 @@ $app->chdir(__DIR__.'/../../');
 $app->addCommandsPath('vendor/propel/propel/src/Propel/Generator/Command/', 'Propel\\Generator\\Command');
 
 $app->loadCommands();
-$app->run();;
+$app->run();

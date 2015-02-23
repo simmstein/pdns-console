@@ -9,7 +9,6 @@ use Deblan\Console\Command\Input\Input;
 $app = new Application('PowerDNS CLI', '1');
 
 $app->chdir(__DIR__.'/../');
-
 $app->addCommandsPath('src/Deblan/PowerDNS/Command/', 'Deblan\\PowerDNS\\Command');
 $app->initPropel();
 $app->loadCommands();
