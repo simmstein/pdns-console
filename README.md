@@ -45,16 +45,16 @@ PDNS-Console provided a CLI to manage PowerDNS application and improved it by ad
 #### Specifications
 
 * We want to mange the domain *example.com*
-* We need 3 records
-	* *example.com* -> 1.2.3.4
+* We need 3 records:
+	* *example.tld* -> 1.2.3.4
 	* *www.example.com* -> same as *example.com*
-    * *example.com* MX is mail.foo.net
+    * *example.tld* MX is mail.foo.net
 
 #### Add the domain
 
 ```
 $ ./app/console domain:add
-Name: example.com
+Name: example.tld
 MASTER [null]:
 Type [NATIVE]:
 Domain added
@@ -62,7 +62,7 @@ Domain added
 
 ```
 $ ./app/console domain:list
-DOMAIN: example.com
+DOMAIN: example.tld
 ID    : 5
 TYPE  : NATIVE
 MASTER:
@@ -105,6 +105,9 @@ No record found.
 ```
 
 ```
+$ ./app/console zone:record:add 4 1 --name @ --type SOA --content "localhost. postmaster@localhost 0 10800 3600 604800 3600" --ttl 3600 --prio null
+```
+
 $ ./app/console zone:record:add 4 1
 Name: @
 Content: 1.2.3.4
@@ -117,9 +120,12 @@ Zone record added.
 ```
 
 ```
-$ ./app/console zone:record:add 4 1 --name www --type CNAME --content example.com. --ttl 3600 --prio null
+$ ./app/console zone:record:add 4 1 --name www --type CNAME --content example.com. --prio null
+TTL: 3600
 Zone record added.
-$ ./app/console zone:record:add 4 1 --name @ --type CNAME --content mail.foo.net. --ttl 3600 --prio 10
+$ ./app/console zone:record:add 4 1 --name @ --type MX --content mail.foo.net. --ttl 3600 --prio badValue
+Prio [null]: badValueAgain
+Prio [null]: 10
 Zone record added.
 ```
 
@@ -134,11 +140,61 @@ Version: 1 - Active: No
 
    ID | NAME                  | TYPE      | TTL    | PRIO    | CONTENT
 ----------------------------------------------------------------------
+   13 | @                     | SOA       | 3600   |         | localhost postmaster@localhost 0 10800 3600 604800 3600
    14 | @                     | A         | 3600   |         | 1.2.3.4
-   15 | www                   | CNAME     | 3600   |         | example.com.
-   16 | @                     | CNAME     | 3600   | 10      | mail.foo.net.
+   15 | www                   | CNAME     | 3600   |         | example.tld.
+   16 | @                     | MX        | 3600   | 10      | mail.foo.net.
 ```
 
+### Active and assign the new zone
+
+```
+$ ./app/console zone:version:active 4 1
+Zone version activated.
+$ ./app/console zone:assign 4 5
+Domain zone updated.
+```
+
+```
+./app/console domain:list --zone
+DOMAIN: example.tld
+ID    : 5
+TYPE  : NATIVE
+MASTER: 
+
+
+      > Example zone
+      > ------------
+      > My example zone
+      > ID: 4
+      > 
+      > Version: 1 - Active: Yes
+      > 
+      >    ID | NAME                  | TYPE      | TTL    | PRIO    | CONTENT
+      > ----------------------------------------------------------------------
+      >    13 | @                     | SOA       | 3600   |         | localhost postmaster@localhost 0 10800 3600 604800 3600
+      >    14 | @                     | A         | 3600   |         | 1.2.3.4
+      >    15 | www                   | CNAME     | 3600   |         | example.tld.
+      >    16 | @                     | MX        | 3600   | 10      | mail.foo.net.
+      > 
+```
+
+### Push modifications
+
+```
+./app/console zone:push
+```
+
+### Test :)
+
+```
+$ dig +short -t A @localhost example.tld
+1.2.3.4
+$ dig +short -t CNAME @localhost www.example.tld
+example.tld.
+$ dig +short -t MX @localhost example.tld
+10 mail.foo.net.
+```
 
 # Installation
 
