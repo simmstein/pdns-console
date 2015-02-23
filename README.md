@@ -63,12 +63,14 @@ Domain added
 ```
 $ ./app/console domain:list
 DOMAIN: example.tld
-ID    : 5
+ID    : 5             # This ID is important
 TYPE  : NATIVE
 MASTER:
 ```
 
 ### Create a zone
+
+#### Interactive (or not)
 
 ```
 $ ./app/console zone:add
@@ -77,18 +79,22 @@ Description: My example zone
 Zone added.
 ```
 
+#### The list is updated
+
 ```
 $ ./app/console zone:list
 Example zone
 ------------
 My example zone
-ID: 4
+ID: 4                 # This ID is important
 
 No version found
 ```
 
+#### New version for "Example zone" (ID=4)
+
 ```
-$ ./app/console zone:version:add 4
+$ ./app/console zone:version:add 4 # My zone ID
 Zone version added.
 ```
 
@@ -104,9 +110,14 @@ Version: 1 - Active: No
 No record found.
 ```
 
+#### New records
+
+#### "SOA" record (no interactive)
 ```
 $ ./app/console zone:record:add 4 1 --name @ --type SOA --content "localhost. postmaster@localhost 0 10800 3600 604800 3600" --ttl 3600 --prio null
 ```
+
+#### "A" record (interactive)
 
 ```
 $ ./app/console zone:record:add 4 1
@@ -120,15 +131,24 @@ Prio [null]:
 Zone record added.
 ```
 
+#### "CNAME" record. "--ttl" is missing
+
 ```
 $ ./app/console zone:record:add 4 1 --name www --type CNAME --content example.tld. --prio null
 TTL: 3600
 Zone record added.
+```
+
+#### "MX" record. The validation of "--prio" failed
+
+```
 $ ./app/console zone:record:add 4 1 --name @ --type MX --content mail.foo.net. --ttl 3600 --prio badValue
 Prio [null]: badValueAgain
 Prio [null]: 10
 Zone record added.
 ```
+
+#### My version is now ready
 
 ```
 $ ./app/console zone:list
