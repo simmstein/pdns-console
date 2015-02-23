@@ -7,7 +7,7 @@ PDNS-Console provided a CLI to manage PowerDNS application and improved it by ad
 ## Requirements
 
 * PHP >= 5.4
-* PDO with modules to connect on your database)
+* PDO with module for database connection
 * Instance of PDNS (Powerdns) >= 3.1 with MySQL/PostgreSQL/SQLite backend
 
 ## Downloading sources
