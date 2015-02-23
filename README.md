@@ -44,7 +44,7 @@ PDNS-Console provided a CLI to manage PowerDNS application and improved it by ad
 
 #### Specifications
 
-* We want to mange the domain *example.com*
+* We want to mange the domain *example.tld*
 * We need 3 records:
 	* *example.tld* -> 1.2.3.4
 	* *www.example.tld* -> same as *example.tld*
@@ -120,7 +120,7 @@ Zone record added.
 ```
 
 ```
-$ ./app/console zone:record:add 4 1 --name www --type CNAME --content example.com. --prio null
+$ ./app/console zone:record:add 4 1 --name www --type CNAME --content example.tld. --prio null
 TTL: 3600
 Zone record added.
 $ ./app/console zone:record:add 4 1 --name @ --type MX --content mail.foo.net. --ttl 3600 --prio badValue
