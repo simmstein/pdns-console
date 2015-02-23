@@ -1,6 +1,6 @@
 # pdns-console
 
-PDNS-Console provided a CLI to manage PowerDNS application and improved it by adding a powerfull DNS zone versionning. 
+PDNS-Console provided a CLI to manage PowerDNS application and improved it by adding a powerfull DNS zone versionning.
 
 # Commands
 
@@ -40,6 +40,106 @@ PDNS-Console provided a CLI to manage PowerDNS application and improved it by ad
  zone:version:unactive   Active a zone version
 ```
 
+### Example
+
+#### Specifications
+
+* We want to mange the domain *example.com*
+* We need 3 records
+	* *example.com* -> 1.2.3.4
+	* *www.example.com* -> same as *example.com*
+    * *example.com* MX is mail.foo.net
+
+#### Add the domain
+
+```
+$ ./app/console domain:add
+Name: example.com
+MASTER [null]:
+Type [NATIVE]:
+Domain added
+```
+
+```
+$ ./app/console domain:list
+DOMAIN: example.com
+ID    : 5
+TYPE  : NATIVE
+MASTER:
+```
+
+### Create a zone
+
+```
+$ ./app/console zone:add
+Name: Example zone
+Description: My example zone
+Zone added.
+```
+
+```
+$ ./app/console zone:list
+Example zone
+------------
+My example zone
+ID: 4
+
+No version found
+```
+
+```
+$ ./app/console zone:version:add 4
+Zone version added.
+```
+
+```
+$ ./app/console zone:list
+Example zone
+------------
+My example zone
+ID: 4
+
+Version: 1 - Active: No
+
+No record found.
+```
+
+```
+$ ./app/console zone:record:add 4 1
+Name: @
+Content: 1.2.3.4
+
+Available types: A AAAA CNAME MX NS TXT SPF WKS SRV LOC SOA
+Type: A
+TTL: 3600
+Prio [null]:
+Zone record added.
+```
+
+```
+$ ./app/console zone:record:add 4 1 --name www --type CNAME --content example.com. --ttl 3600 --prio null
+Zone record added.
+$ ./app/console zone:record:add 4 1 --name @ --type CNAME --content mail.foo.net. --ttl 3600 --prio 10
+Zone record added.
+```
+
+```
+$ ./app/console zone:list
+Example zone
+------------
+My example zone
+ID: 4
+
+Version: 1 - Active: No
+
+   ID | NAME                  | TYPE      | TTL    | PRIO    | CONTENT
+----------------------------------------------------------------------
+   14 | @                     | A         | 3600   |         | 1.2.3.4
+   15 | www                   | CNAME     | 3600   |         | example.com.
+   16 | @                     | CNAME     | 3600   | 10      | mail.foo.net.
+```
+
+
 # Installation
 
 ## Requirements
@@ -69,7 +169,7 @@ curl -sS https://getcomposer.org/installer | php
 
 * ```dsn: "mysql:host=localhost;dbname=pdns"```
   * Change *localhost* with the database server name
-  * Change "pdns" with the database name
+  * Change *pdns* with the database name
 
 * Change user and password values with your pdsn database login
 
