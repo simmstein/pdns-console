@@ -54,6 +54,6 @@ pdns-console needs to update pdns original tables and uses 3 mores.
 
 ## Symlink
 
-To access the console without use the full path of `app/console`, make a symlink:
+To access the console without using the full path of `app/console`, make a symlink:
 
 ```ln -s $PWD/app/console /usr/local/bin/```
