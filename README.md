@@ -72,9 +72,9 @@ TYPE  : NATIVE
 MASTER:
 ```
 
-### Create a zone
+#### Create a zone
 
-#### Interactive (or not)
+##### Interactive (or not)
 
 ```
 $ ./app/console zone:add
@@ -83,7 +83,7 @@ Description: My example zone
 Zone added.
 ```
 
-#### The list is updated
+##### The list is updated
 
 ```
 $ ./app/console zone:list
@@ -95,7 +95,7 @@ ID: 4                 # This ID is important
 No version found
 ```
 
-#### New version for "Example zone" (ID=4)
+##### New version for "Example zone" (ID=4)
 
 ```
 $ ./app/console zone:version:add 4 # My zone ID
@@ -114,14 +114,14 @@ Version: 1 - Active: No
 No record found.
 ```
 
-#### New records
+#### Add the records
 
-#### "SOA" record (no interactive)
+##### "SOA" record (no interactive)
 ```
 $ ./app/console zone:record:add 4 1 --name @ --type SOA --content "localhost. postmaster@localhost 0 10800 3600 604800 3600" --ttl 3600 --prio null
 ```
 
-#### "A" record (interactive)
+##### "A" record (interactive)
 
 ```
 $ ./app/console zone:record:add 4 1
@@ -135,7 +135,7 @@ Prio [null]:
 Zone record added.
 ```
 
-#### "CNAME" record. "--ttl" is missing
+##### "CNAME" record. "--ttl" is missing
 
 ```
 $ ./app/console zone:record:add 4 1 --name www --type CNAME --content example.tld. --prio null
@@ -143,7 +143,7 @@ TTL: 3600
 Zone record added.
 ```
 
-#### "MX" record. The validation of "--prio" failed
+##### "MX" record. The validation of "--prio" failed
 
 ```
 $ ./app/console zone:record:add 4 1 --name @ --type MX --content mail.foo.net. --ttl 3600 --prio badValue
@@ -152,7 +152,7 @@ Prio [null]: 10
 Zone record added.
 ```
 
-#### My version is now ready
+##### My version is now ready
 
 ```
 $ ./app/console zone:list
@@ -171,7 +171,7 @@ Version: 1 - Active: No
    16 | @                     | MX        | 3600   | 10      | mail.foo.net.
 ```
 
-### Active and assign the new zone
+#### Active and assign the new zone
 
 ```
 $ ./app/console zone:version:active 4 1
@@ -204,13 +204,13 @@ MASTER:
       > 
 ```
 
-### Push modifications
+#### Push modifications
 
 ```
 ./app/console zone:push
 ```
 
-### Test :)
+#### Test :)
 
 ```
 $ dig +short -t A @localhost example.tld
