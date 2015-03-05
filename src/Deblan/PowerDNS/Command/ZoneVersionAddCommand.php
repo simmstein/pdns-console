@@ -4,7 +4,6 @@ namespace Deblan\PowerDNS\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Deblan\Console\Command\AbstractCommand;
 use Deblan\PowerDNS\Model\ZoneVersionQuery;
@@ -38,7 +37,7 @@ class ZoneVersionAddCommand extends AbstractCommand
             return;
         }
 
-        $zoneVersion = (new ZoneVersion())
+        (new ZoneVersion())
             ->setVersion($zone->countZoneVersions() ? ZoneVersionQuery::create()->orderByVersion(Criteria::DESC)->findOne()->getVersion() + 1 : 1)
             ->setZone($zone)
             ->setIsActive(false)

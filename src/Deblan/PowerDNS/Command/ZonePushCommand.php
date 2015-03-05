@@ -4,7 +4,6 @@ namespace Deblan\PowerDNS\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Deblan\PowerDNS\Model\RecordQuery;
 use Deblan\PowerDNS\Model\DomainQuery;
