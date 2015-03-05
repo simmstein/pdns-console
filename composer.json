@@ -4,7 +4,7 @@
     "description": "pdns-console - console tool to manage pdns server",
     "keywords": [],
     "homepage": "http://www.deblan.tv/",
-    "license": "New BSD",
+    "license": " BSD-2-Clause",
     "authors": [
         {
             "name": "Simon Vieille",
