@@ -1,6 +1,6 @@
 # pdns-console
 
-PDNS-Console provided a CLI to manage PowerDNS application and improved it by adding a powerfull DNS zone versionning.
+PDNS-Console provides a CLI to manage PowerDNS application and improved it by adding a powerfull DNS zone versionning.
 
 * [Installation](#installation)
 * [Available commands](#available-commands)
