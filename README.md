@@ -48,7 +48,7 @@ PDNS-Console provides a CLI to manage PowerDNS application and improved it by ad
 
 #### Specifications
 
-* We want to mange the domain *example.tld*
+* We want to manage the domain *example.tld*
 * We need 3 records:
 	* *example.tld* -> 1.2.3.4
 	* *www.example.tld* -> same as *example.tld*
